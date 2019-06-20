@@ -1,0 +1,63 @@
+<form #loginForm="ngForm" autocomplete="off">
+
+
+    <mat-form-field>
+      <input matInput placeholder="Add Activity" (keyup)="onKey($event)" required class ="redborder" minlength="3" maxlength="20" ngModel name="activity" #activity='ngModel' type="text">
+
+    </mat-form-field>
+   <!-- This little div code below is the code to validate if the input field is ok 
+  or else it displays the error-->
+  <div class="alert" *ngIf="(activity.touched && !activity.valid)">
+    <div style="color: red" *ngIf="activity.errors.minlength">* Minimum length is 3 characters</div>
+  </div>
+<!-- to standalone option mpainei gia na gini to priority akrivos opos leei to option standalone ekso apo ti forma oste na min epireazetai i forma apo to an auto einai simpliromeno i oxi dioti den einai ipoxreotiko o xristis na to simplirosei ean den thelei-->
+  <p><mat-checkbox id="check" [(ngModel)]="priority" [ngModelOptions]="{standalone: true}"> Priority </mat-checkbox></p>
+  
+  <p> Day Scheduled: {{currentDay}} / {{currentMonth}} / {{currentYear}} </p>
+  <p><mat-form-field>
+    <input matInput placeholder="Time"  theme="material-green" (change)="onChangeScheduled($event)" class ="atredborder" required ngModel name="at" #at='ngModel' atp-time-picker type="time" >
+  </mat-form-field>
+</p>
+ <!-- This little div code below is the code to validate if the input field is ok 
+  or else it displays the error-->
+    <div *ngIf="(at.touched && !at.valid)"></div>
+    <div style="color: red" *ngIf="TimeExists">* {{Scheduled_at}} already exists</div>
+ 
+
+
+  <p><mat-form-field> <!--onKeyDown="return false" gia na apenergopoiei tin eisodo apo to pliktrologio-->
+    <input matInput [(ngModel)]="durValueField" placeholder="Minutes" (change)="onChangeDuration($event)" class ="durationredborder" required ngModel name="duration" #duration='ngModel' type="number" min="1" max="{{1440 - SumDurations}}" placeholder="minutes">
+    </mat-form-field>
+  </p>
+<div style="color: green" *ngIf="durValueField !== undefined && durValueField !== null">You have {{1440 - SumDurations - durValueField}} minutes free left</div>
+<div style="color: green" *ngIf="durValueField  == undefined || durValueField == null">You have {{1440 - SumDurations}} minutes left free</div>
+ 
+<!-- This little div code below is the code to validate if the input field is ok 
+  or else it displays the error-->
+    <div *ngIf="(duration.touched && !duration.valid)"></div>
+      <div style="color: red" *ngIf="durValueField <= 0">* Minimum duration must not be less or equal to '0' or empty</div>
+<div style="color: red" *ngIf="durValueField > (1440 - SumDurations)">* Maximum duration must not be greater than (24h*60m=1440 - all submitted minutes)</div>
+<div style="color: red; font-size: 11px;" *ngIf="displaySolutions == true && priority == true">* Time selected + minutes found to be greater in duration than another priority's starting time...
+  <p> Recommendations </p>
+                <p>   - Uncheck Priority </p>
+                <p>   - Change Time </p>
+                <p>   - Change Minutes {{'(' + '-' + diaforaOron + 'mins' + ')'}}</p>
+                <p>   - Move to another Day</p>
+  </div>
+  <div style="color: red; font-size: 11px;" *ngIf="displaySolutions2 == true && priority == true">* Time selected found to be confusing :( Another priority won't be finished by then...
+      <p> Recommendations </p>
+                    <p>   - Uncheck Priority </p>
+                    <p>   - Change Time </p>
+                    <p>   - Move to another Day</p>
+      </div>
+  
+  <button style="float: right" mat-button (click)="onNoClick()">Cancel</button>
+  <button style="float: right" mat-raised-button color="primary" class="save" type="submit"  [disabled]="loginForm.form.invalid || durValueField <= 0 || durValueField > (1440 - SumDurations) || TimeExists || displaySolutions && priority == true || displaySolutions2 == true && priority == true" (click)="addActivity(loginForm)">save</button>  
+  
+</form>
+<!--
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button cdkFocusInitial>Done</button>
+</div>
+-->
