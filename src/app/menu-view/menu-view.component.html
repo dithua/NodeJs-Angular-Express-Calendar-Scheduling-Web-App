@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+<body app-menu-view>
+  
+    <button mat-raised-button (click)="openAddForm()">Add</button>
+
+
+
+
+    <mat-form-field id="matSELECT">
+        <mat-label>Select Date</mat-label>
+        <mat-select (click)="showActivities()" [(ngModel)]="currentDayy / currentMonthh / currentYearr">
+          <mat-option *ngFor="let d of posts" (click)="showActivitiesForSelectedDay(d)" [value]="d.currentDay / d.currentMonth / d.currentYear">
+              {{d.currentDay}} / {{d.currentMonth}} / {{d.currentYear}}
+              <button mat-button id="delButton2" (click)="deleteAllAct(d.currentDay, d.currentMonth, d.currentYear)"> <i class="fa fa-trash"></i> </button>
+              
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button id="sortButton" mat-raised-button (click)="sortTable($event)"> SORT RESULTS </button>
+     
+      <table id="matT" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            
+          
+        <!-- ACTIVITY COLUMN -->
+        <ng-container matColumnDef="Activity">
+          <th id="matTH" mat-header-cell *matHeaderCellDef> ACTIVITY </th>
+          <td id="matTD" mat-cell *matCellDef="let k"> 
+         
+            <mat-form-field floatLabel="always" style="width:100px">                      
+                            <input matInput placeholder="Edit Activity" value="{{k.activity}}" (change)="onChangeAc($event, k)" minlength="3" maxlength="20" size="5" [formControl]="myfield"> 
+                            <mat-error *ngIf="(myfield.hasError('required') || myfield.hasError('minlength')) && k.id == rowid">
+                                This field is required. 3 characters minimum
+                              </mat-error>                 
+            </mat-form-field> 
+              
+          </td>
+        </ng-container>
+      
+        <!-- DAY COLUMN -->
+        <ng-container matColumnDef="Day">
+          <th id="matTH" mat-header-cell *matHeaderCellDef> DAY </th>
+          <td id="matTD" mat-cell *matCellDef="let k">  
+
+            <mat-form-field floatLabel="always" style="width:100px">
+              <input onKeyDown="return false" matInput placeholder="Edit Day" value="{{k.currentDay}}/{{k.currentMonth}}/{{k.currentYear}}" (change)="onChangeDAy($event, k)"  [formControl]="myfield2">
+              <mat-error *ngIf="(myfield2.hasError('required') || myfield2.hasError('pattern')) && k.id == rowid">
+                 This field is required. In this form dd/mm/yyyy
+               </mat-error>
+             </mat-form-field>  
+          
+            </td>
+        </ng-container>
+      
+        <!-- TIME COLUMN -->
+        <ng-container matColumnDef="Time">
+          <th id="matTH" mat-header-cell *matHeaderCellDef> TIME </th>
+          <td id="matTD" mat-cell *matCellDef="let k"> 
+
+            <mat-form-field style="width:100px">
+                    <input matInput placeholder="Edit Time"  theme="material-green" (change)="onChangeAt($event, k)" value="{{k.Scheduled_at}}" type="time" atp-time-picker [formControl]="myfield3" >
+                    
+                  </mat-form-field>
+                  <mat-error *ngIf="dontAllowEditTime && k.id == rowid">
+                    Time already exists or there's a confliction
+                  </mat-error>
+        <p *ngIf="k.id == idd" style="font-size: 15px; color: green"> Start at: {{recommendedHour}} </p>
+          </td>
+        </ng-container>
+      
+        <!-- DURATION COLUMN -->
+        <ng-container matColumnDef="Duration">
+          <th id="matTH" mat-header-cell *matHeaderCellDef> DURATION </th>
+          <td id="matTD" mat-cell *matCellDef="let k"> 
+            
+              <mat-form-field floatLabel="always" style="width:100px">
+                  <input matInput placeholder="Edit Min" (change)="onChangeDur($event, k)" value="{{k.duration}}" type="number" min="0" [formControl]="myfield4">
+                  
+                </mat-form-field>   
+                <mat-error *ngIf="dontAllowEditDuration && k.id == rowid">
+                  Another priority is in progress ...
+                </mat-error>          
+          </td>
+        </ng-container>
+
+
+           <!-- PRIORITY COLUMN -->
+           <ng-container matColumnDef="Priority">
+            <th id="matTH" mat-header-cell *matHeaderCellDef> PRIORITY </th>
+            <td id="matTD" mat-cell *matCellDef="let k"> 
+              
+                
+                  <mat-checkbox [checked]="k.priority" (change)="onChangeCheck($event, k)"></mat-checkbox>
+                  <mat-error *ngIf="dontAllowEdit && k.id == rowid">
+                    Another priority is in progress ... You can not set this as priority too
+                  </mat-error>     
+            </td>
+          </ng-container>
+
+      
+        <ng-container matColumnDef="actions">
+          
+            <th id="matTH" mat-header-cell *matHeaderCellDef></th>
+            <td id="matTD" mat-cell *matCellDef="let k">
+                <button *ngIf="k.id == rowid && !(myfield.hasError('required') || myfield2.hasError('required') || myfield.hasError('minlength') || myfield2.hasError('pattern'))" type="submit" mat-raised-button id="tickButton" [disabled]="!(activityTRUE||timeTRUE||durationTRUE||dayTRUE||priorityTRUE) || dontAllowEdit || dontAllowEditTime || dontAllowEditDuration" (click)="update(k)" style="min-width: 2%"> <i class="fa fa-pencil" style="font-size:16px"></i> </button>
+                <button mat-raised-button id="delButton" (click)="deleteAct(k.id)" style="min-width: 2%;"> <i class="fa fa-trash"></i> </button>
+       
+            </td>
+            
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>       
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+        
+      
+      </table>
+      
+      <mat-paginator id="paginator" [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[3, 5, 10]"
+      (page)="pageEvent = $event" showFirstLastButtons>
+      </mat-paginator>  
+
+
+</body>
+</html>
