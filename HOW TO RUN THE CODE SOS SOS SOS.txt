@@ -38,3 +38,33 @@ cd project_folder για μεταφορά στον φάκελο του project �
 
 Θα πρέπει και σε αυτή τη μέθοδο να προσέξουμε να υπάχουν όλα τα αρχεία του project με την ιεραρχεία που υπάρχουν σε αυτό το 
 αποθετήριο + τον φάκελο node_modules...
+
+--------------------------------------------
+
+Ο κώδικας τρέχει localhost ... αν έχουμε τον xampp τα credentials της βάσης είναι αυτά που έχουν ήδη χρησιμοποιηθεί και είναι τα ακόλουθα...
+
+  host     : 'localhost',
+	user     : 'root',
+	password : '',
+	database : 'mydb'
+  
+όπου database : 'mydb' η βάση που έχουμε δημιουργήσει με το όνομα που της δώσαμε σε κάθε άλλη περίπτωση βάσης αυτά θα πρέπει να αλλάξουν στη γραμμή 26-32 στο αρχείο server.js και στη γραμμή 20-26 στο αρχείο server2.js ανάλογα με το ποιο τρέχουμε...
+
+για τη δημιουργία του table εκτελούμε την sql εντολή:
+
+CREATE TABLE records (
+ 
+   
+	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,    
+	activity VARCHAR(20) NOT NULL,    
+	currentMonth INT(20) NOT NULL,    
+	currentDay INT(20) NOT NULL,    
+	currentYear INT(20) NOT NULL,    
+	Scheduled_at TIME NOT NULL,    
+	duration INT(20) NOT NULL,  
+	priority BOOLEAN NOT NULL
+
+)
+ και για οποιοδήποτε άλλο είδους deploy εκτός του localhost καλό είναι να λάβουμε υπόψη εάν χρειαστεί και τη γραμμή 15 στη διαδρομή για το αρχείο NodeJs-Angular-Express-Calendar-Scheduling-Web-App/src/app/httpservice.service.ts στο repository αυτό... Από αυτή τη γραμμή το frontend χτυπάει και βρίσκει το backend...
+ 
+ Ο φάκελος dist έχει δημιουργηθεί με τη γραμμή 15 που αναφέρεται παραπάνω να βρίσκει το backend για localhost deployment. Όποια αλλαγή γίνει στο frontend για άλλο είδους deployment ο φάκελος dist εάν χρησιμοποιηθεί στο deploy θα πρέπει να ξαναδημιουργηθεί τρέχουντας την εντολή ng build --prod στο node cli αφού το έχουμε κάνει να "βλέπει" το φάκελο του project με την εντολή cd project_folder_path
