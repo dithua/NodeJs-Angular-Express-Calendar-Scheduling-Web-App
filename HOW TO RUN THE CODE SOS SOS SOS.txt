@@ -13,6 +13,23 @@ event το οποίο είναι αυτό που θα μεταφέρει στο 
 γραμμές 92-107 στον κώδικα του αρχείου της λογικής --> dialog-component.component.ts
 
 
+Αν θέλουμε να μην κάνουμε 2 κλικ μπορούμε να σβήσουμε τον atp και να καταχωρούμε την ώρα χωρίς αυτό το pop up clock
+απλά με ένα απλό html time field... Για να γίνει αυτό πάμε στο αρχείο στο μονοπάτι
+
+NodeJs-Angular-Express-Calendar-Scheduling-Web-App/src/app/dialog-component/dialog-component.component.html
+γραμμή 18 και σβήνουμε τα
+
+theme="material-green" 
+atp-time-picker
+
+& στο μονοπάτι 
+
+NodeJs-Angular-Express-Calendar-Scheduling-Web-App/src/app/menu-view/menu-view.component.html
+
+γραμμή 66 και σβήνουμε πάλι τα ίδια
+
+αποθηκεύουμε και τέλος!
+
 -----------------------------------------------
 ΠΩΣ ΤΡΕΧΟΥΜΕ ΤΟΝ ΚΩΔΙΚΑ... (όλες οι εντολές εκτελούνται στο node cli το οποίο με την εντολή cd αρχικά μεταβαίνουμε στο φάκελο του
 project μας πριν εκτελέσουμε οποιαδήποτε άλλη εντολή)
