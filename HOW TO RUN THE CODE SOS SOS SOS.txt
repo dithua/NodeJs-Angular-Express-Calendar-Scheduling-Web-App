@@ -34,9 +34,32 @@ NodeJs-Angular-Express-Calendar-Scheduling-Web-App/src/app/menu-view/menu-view.c
 ΠΩΣ ΤΡΕΧΟΥΜΕ ΤΟΝ ΚΩΔΙΚΑ... (όλες οι εντολές εκτελούνται στο node cli το οποίο με την εντολή cd αρχικά μεταβαίνουμε στο φάκελο του
 project μας πριν εκτελέσουμε οποιαδήποτε άλλη εντολή)
 
+ΔΗΜΙΟΥΡΓΙΑ ΤΟΥ ΦΑΚΕΛΟΥ ΤΟΥ PROJECT
+
+εγκατάσταση node cli
+εκτέλεση παρακάτω εντολών στο node cli
+ng new name_of_the_project (δημιουργία του φακέλου του project με όλα τα απαραίτητα αρχεία το path
+στο οποίο εγκαθίσταται το project είναι στα windows το ακόλουθο C:\Users\PC-NAME\calendar-app)
+cd name_of_the_project
+ng g c component_name (δημιουργούμε με αυτήν την εντολή τόσα components όσα έχει η εφαρμογή)
+ng g s service_name (δημιουργούμε τόσα services όσα έχει η εφαρμογή)
+npm install (την εκτελούμε αφού έχουμε αντιγράψει όλα τα αρχεία αυτού του repository στα αντίστοιχα αρχεία του φακέλου του project)
+
+---------------
+
+αν κάτι δεν έχει εγκατασταθεί με την εντολή npm install στο τέλος
+μπορεί να λυθεί εάν τρέξουμε manually στο node cli τις εντολές:
+
+npm install -g @angular/cli
+npm install --save @angular/material @angular/cdk @angular/animations
+npm i atp (είναι η εγκατάσταση του amazing time picker module)
+npm install express
+
+
 Έχουμε 2 αρχεία server.js
 
-Το server.js καλείται με get στο root url και σερβίρει πίσω το frontend στον client το οποίο διαβάζει από τον φάκελο dist
+Το server.js υλοποιεί CRUD operations και ακούει στο port 3000 και καλώντας με get στο root url (localhost:3000/) 
+σερβίρει πίσω το frontend στον client το οποίο διαβάζει από τον φάκελο dist
 ο οποίος περιέχει το frontend αλλά όχι σε source code μορφή παρά σε μορφή τέτοια που έχει δημιουργηθεί από την 
 εντολή ng build άρα έχουμε "χτίσει" εκεί το project μας. Έχοντας τον dist το server.js και όλα τα υπόλοιπα αρχεία στον ίδιο φάκελο 
 με το server.js καθώς επίσης και τον φάκελο node_modules μπορούμε να τρέξουμε το project με την εντολή
@@ -60,7 +83,7 @@ cd project_folder για μεταφορά στον φάκελο του project �
 
 --------------------------------------------
 
-Ο κώδικας τρέχει localhost ... αν έχουμε τον xampp τα credentials της βάσης είναι αυτά 
+Ο κώδικας τρέχει localhost ... αν έχουμε τον xampp, τα credentials της βάσης είναι αυτά 
 που έχουν ήδη χρησιμοποιηθεί και είναι τα ακόλουθα...
 
   host     : 'localhost',
