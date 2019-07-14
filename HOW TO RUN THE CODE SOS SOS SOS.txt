@@ -34,26 +34,16 @@ NodeJs-Angular-Express-Calendar-Scheduling-Web-App/src/app/menu-view/menu-view.c
 ΠΩΣ ΤΡΕΧΟΥΜΕ ΤΟΝ ΚΩΔΙΚΑ... (όλες οι εντολές εκτελούνται στο node cli το οποίο με την εντολή cd αρχικά μεταβαίνουμε στο φάκελο του
 project μας πριν εκτελέσουμε οποιαδήποτε άλλη εντολή)
 
+---------------
+
 ΔΗΜΙΟΥΡΓΙΑ ΤΟΥ ΦΑΚΕΛΟΥ ΤΟΥ PROJECT
 
 εγκατάσταση node cli
 εκτέλεση παρακάτω εντολών στο node cli
-ng new name_of_the_project (δημιουργία του φακέλου του project με όλα τα απαραίτητα αρχεία το path
-στο οποίο εγκαθίσταται το project είναι στα windows το ακόλουθο C:\Users\PC-NAME\calendar-app)
 cd name_of_the_project
-ng g c component_name (δημιουργούμε με αυτήν την εντολή τόσα components όσα έχει η εφαρμογή)
-ng g s service_name (δημιουργούμε τόσα services όσα έχει η εφαρμογή)
 npm install (την εκτελούμε αφού έχουμε αντιγράψει όλα τα αρχεία αυτού του repository στα αντίστοιχα αρχεία του φακέλου του project)
 
 ---------------
-
-αν κάτι δεν έχει εγκατασταθεί με την εντολή npm install στο τέλος
-μπορεί να λυθεί εάν τρέξουμε manually στο node cli τις εντολές:
-
-npm install -g @angular/cli
-npm install --save @angular/material @angular/cdk @angular/animations
-npm i atp (είναι η εγκατάσταση του amazing time picker module)
-npm install express
 
 
 Έχουμε 2 αρχεία server.js
