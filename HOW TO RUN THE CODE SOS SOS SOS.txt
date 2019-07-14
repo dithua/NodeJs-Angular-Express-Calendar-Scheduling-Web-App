@@ -40,7 +40,7 @@ project μας πριν εκτελέσουμε οποιαδήποτε άλλη �
 
 εγκατάσταση node cli
 εκτέλεση παρακάτω εντολών στο node cli
-cd name_of_the_project
+cd path_of_the_folder_of_the_project
 npm install (την εκτελούμε αφού έχουμε αντιγράψει όλα τα αρχεία αυτού του repository στα αντίστοιχα αρχεία του φακέλου του project)
 
 ---------------
@@ -58,7 +58,7 @@ node server.js ή nodemon server.js (αν έχουμε εγκαταστήσει 
 xampp). Επισκεπτόμαστε το σύνδεμο --> "localhost:3000" και βλέπουμε την εφαρμογή μας!!!
 
 Ο φάκελος node_modules δεν περιλαμβάνεται εδώ, γι'αυτό το λόγο θα πρέπει στο node cli να εκτελεστεί η εντολή
-cd project_folder για μεταφορά στον φάκελο του project μας και στη συνέχεια η εντολή npm install ώστε να διαβαστεί 
+cd path_of_the_folder_of_the_project για μεταφορά στον φάκελο του project μας και στη συνέχεια η εντολή npm install ώστε να διαβαστεί 
 το αρχείο package.json από τον npm και να δημιουργηθεί ο φάκελος node_modules με όλα τα modules και dependencies
 που απαιτούνται...
 
